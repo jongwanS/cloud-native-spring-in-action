@@ -9,26 +9,26 @@ server:
 
 spring:
   application:
-    name: catalog-service
+    name: catalog-service #설정 서버가 올바른 설정 데이터를 반환하기 위해서는 애플리케이션 이름을 사용한다.
   config:
-    import: "optional:configserver:"
+    import: "optional:configserver:" #설정 서버와의 상호작용을 선택적으로 만들 수 있다(config 서버가 꺼져있어도 애플리케이션은 켜진다.)
   cloud:
     config:
-      uri: http://localhost:8888
-      request-connect-timeout: 5000 # 5s
-      request-read-timeout: 5000 # 5s
-      fail-fast: false # In production, set to true
+      uri: http://localhost:8888  #컨피그 서버 uri
+      request-connect-timeout: 5000 # 5s, 설정 서버에 연결될때까지 기다리는 시간
+      request-read-timeout: 5000 # 5s, 설정 서버에서 설정 데이터를 읽을때까지 기다리는 시간
+      fail-fast: false # In production, set to true, 설저 서버 연결 실패를 치명적 오류로 인식
       retry:
-        max-attempts: 6
-        initial-interval: 1000 # 1s
-        max-interval: 2000 # 2s
-        multiplier: 1.1
+        max-attempts: 6 # 시도 최대 횟수
+        initial-interval: 1000 # 1s, 최초 재시도 지연 시간
+        max-interval: 2000 # 2s, 재시도 지연 최대 시간
+        multiplier: 1.1 # 지연 시간 계산 승수
 
 management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: refresh # /actuator/refresh 엔드포인트를 노출시킨다.
 
 polar:
   greeting: Welcome to the local book catalog!

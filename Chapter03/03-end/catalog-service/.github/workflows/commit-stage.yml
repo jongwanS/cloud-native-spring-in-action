@@ -1,3 +1,14 @@
+#act -l --container-architecture linux/amd64
+# 푸시 이벤트 시작 (기본)
+#  act
+# 푸시 이벤트 시작 (기본), m1 mac일 경우
+#  act --container-architecture linux/amd64
+# 특정한 이벤트 시작
+#  act pull_request
+# 특정한 job만 실행하기
+#  act -j job_name
+# 특정한 workflow만 실행하기
+#  act -j lint -W .github/workflows/checks.yml
 name: Commit Stage
 on: push
 
